@@ -343,9 +343,17 @@ def rock_spawner():
     global rock_group
     
     # initialize rock
-    rock_pos = [random.randrange(0, WIDTH), random.randrange(0, HEIGHT)]
-    rock_vel = [random.random() * .6 - .3 + score / 10, random.random() * .6 - .3 + score / 10]
+    if random.random() < 0.5:
+        negative_h = -1
+    else:
+        negative_h = 1
+    if random.random() < 0.5:
+        negative_v = -1
+    else:
+        negative_v = 1
+    rock_vel = [random.random() * .6 - .3 + score / 40 * negative_h, random.random() * .6 - .3 + score / 40 * negative_v]
     rock_avel = random.random() * .2 - .1
+    rock_pos = [random.randrange(0, WIDTH), random.randrange(0, HEIGHT)]
     if started and len(rock_group) < 12 and dist(rock_pos, my_ship.get_position()) > 75:
         rock_group.add(Sprite(rock_pos, rock_vel, 0, rock_avel, asteroid_image, asteroid_info))
 
